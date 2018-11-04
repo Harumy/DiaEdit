@@ -17,8 +17,10 @@ namespace DiaEdit
         {
             InitializeComponent();
         }
-        string[] Station_List;
-        string[] Train_List;
+        string[] Station_List=new string[0];
+        string[] Train_List=new string[0];
+        int Station_Length = 0;
+        int Train_Length = 0;
         public void LoadDia()
         {
             OpenFileDialog OFD = new OpenFileDialog();
@@ -29,37 +31,89 @@ namespace DiaEdit
                 Console.WriteLine(OFD.FileName);
             }
             StreamReader sr = new StreamReader(OFD.FileName);
-            int i = 0;
             while (sr.Peek() != -1)
             {
-                i++;
                 string read = sr.ReadLine();
                 //Console.WriteLine(read);
                 switch (read)
                 {
-                    case "Rosen":
+                    case "Rosen.":
                         continue;
-                    case "Eki":
-                        Station();
+                    case "Eki.":
+                        Station(sr);
                         continue;
-                    case "Ressyasyubetsu":
+                    case "Ressyasyubetsu.":
                         continue;
-                    case "Dia":
+                    case "Dia.":
                         continue;
-                    case "Ressya":
+                    case "Ressya.":
+                        Train(sr);
                         continue;
                     default:
                         continue;
                 }
             }
         }
-        private void Station()
+        private void Station(StreamReader sr)
         {
             Console.WriteLine("Station");
+            int a = Station_List.Length + 1;
+            Array.Resize(ref Station_List, a);
+            bool A=true;
+            while (A)
+            {
+                string reading = sr.ReadLine();
+                if (reading.IndexOf("=")==-1)
+                {
+                    sr.ReadLine();
+                    Station_Length++;
+                    A = false;
+                }
+                else
+                {
+                    string[] read = reading.Split('=');
+                    switch (read[0])
+                    {
+                        case "Ekimei":
+                            Station_List[Station_Length] = read[1];
+                            Console.WriteLine(Station_List[Station_Length]);
+                            continue;
+                        default:
+                            sr.ReadLine();
+                            continue;
+                    }
+                }
+            }
         }
-        private void Train()
+        private void Train(StreamReader sr)
         {
-            Console.WriteLine("Train");
+            int a = Train_List.Length + 1;
+            Array.Resize(ref Train_List, a);
+            bool A = true;
+            while (A)
+            {
+                string reading = sr.ReadLine();
+                if (reading.IndexOf("=") == -1)
+                {
+                    sr.ReadLine();
+                    Station_Length++;
+                    A = false;
+                }
+                else
+                {
+                    string[] read = reading.Split('=');
+                    switch (read[0])
+                    {
+                        case "Ressyabangou":
+                            Train_List[Train_Length] = read[1];
+                            Console.WriteLine(Train_List[Train_Length]);
+                            continue;
+                        default:
+                            sr.ReadLine();
+                            continue;
+                    }
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
