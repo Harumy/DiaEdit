@@ -30,7 +30,7 @@ namespace DiaEdit
             {
                 Console.WriteLine(OFD.FileName);
             }
-            StreamReader sr = new StreamReader(OFD.FileName);
+            StreamReader sr = new StreamReader(OFD.FileName, System.Text.Encoding.GetEncoding("shift_jis"));
             while (sr.Peek() != -1)
             {
                 string read = sr.ReadLine();
@@ -65,8 +65,9 @@ namespace DiaEdit
                 string reading = sr.ReadLine();
                 if (reading.IndexOf("=")==-1)
                 {
-                    sr.ReadLine();
+                    //sr.ReadLine();
                     Station_Length++;
+                    //Console.WriteLine("終わった");
                     A = false;
                 }
                 else
@@ -95,7 +96,7 @@ namespace DiaEdit
                 string reading = sr.ReadLine();
                 if (reading.IndexOf("=") == -1)
                 {
-                    sr.ReadLine();
+                    //sr.ReadLine();
                     Station_Length++;
                     A = false;
                 }
