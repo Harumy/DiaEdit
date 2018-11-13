@@ -143,6 +143,7 @@ namespace DiaEdit
                     }
                 }
             }
+            Train_Length++;
         }
         private void DataEditStation()
         {
@@ -291,6 +292,50 @@ namespace DiaEdit
         private void button1_Click(object sender, EventArgs e)
         {
             LoadDia();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Station_List.Length; i++)
+            {
+                string StationName = Station_List[i][0];
+                Console.WriteLine(StationName);
+                StreamWriter Writer = new StreamWriter(StationName + ".txt", true, System.Text.Encoding.GetEncoding("shift_jis"));
+                if (Data[i].Length == 1)
+                {
+                    for (int j = 0; j < Data[i][0].Length; j++)
+                    {
+                        if (Data[i][0][j] != 0)
+                        {
+                            string WriteStr = Data[i][0][j] + "=" + Train_List[j][0] + "," + Train_List[j][1] + "," + Train_List[j][2] + "," + Train_List[j][3] + "," + Train_List[j][4] + ",";
+                            Writer.WriteLine(WriteStr);
+                            Console.WriteLine(WriteStr);
+                        }
+                    }
+                }
+                if (Data[i].Length == 2)
+                {
+                    for (int j = 0; j < Data[i][1].Length; j++)
+                    {
+                        if (Data[i][1][j] != 0)
+                        {
+                            string WriteStr = Data[i][1][j] + "=" + Train_List[j][0] + "," + Train_List[j][1] + "," + Train_List[j][2] + "," + Train_List[j][3] + "," + Train_List[j][4] + ",";
+                            Writer.WriteLine(WriteStr);
+                            Console.WriteLine(WriteStr);
+                        }
+                    }
+                }
+                Writer.Close();
+            }
+            /*OpenFileDialog OFD = new OpenFileDialog();
+            OFD.FileName = "大曲-盛岡.txt";
+            OFD.InitialDirectory = @"C:\Users\harum\Desktop";
+            if (OFD.ShowDialog() == DialogResult.OK)
+            {
+                Console.WriteLine(OFD.FileName);
+            }
+            StreamWriter Writer = new StreamWriter(OFD.FileName);
+            */
         }
     }
 }
