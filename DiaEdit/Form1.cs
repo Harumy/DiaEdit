@@ -98,7 +98,7 @@ namespace DiaEdit
             int b = a - 1;
             string UD="";
             Array.Resize(ref Train_List, a);
-            Train_List[b] = new string[6];//列車番号,列車名,号数,種別,備考,行先
+            Train_List[b] = new string[5];//列車番号,列車名,号数,種別,備考
             bool A =new bool();
             A = true;
             while (A)
@@ -307,7 +307,7 @@ namespace DiaEdit
                     {
                         if (Data[i][0][j] != 0)
                         {
-                            string WriteStr = Data[i][0][j] + "=" + Train_List[j][0] + "," + Train_List[j][1] + "," + Train_List[j][2] + "," + Train_List[j][3] + "," + Train_List[j][4] + ",";
+                            string WriteStr = Data[i][0][j] + "=" + Train_List[j][0] + "," + Train_List[j][1] + "," + Train_List[j][2] + "," + Train_List[j][3] + "," + Train_List[j][4];
                             Writer.WriteLine(WriteStr);
                             Console.WriteLine(WriteStr);
                         }
@@ -319,7 +319,7 @@ namespace DiaEdit
                     {
                         if (Data[i][1][j] != 0)
                         {
-                            string WriteStr = Data[i][1][j] + "=" + Train_List[j][0] + "," + Train_List[j][1] + "," + Train_List[j][2] + "," + Train_List[j][3] + "," + Train_List[j][4] + ",";
+                            string WriteStr = Data[i][1][j] + "=" + Train_List[j][0] + "," + Train_List[j][1] + "," + Train_List[j][2] + "," + Train_List[j][3] + "," + Train_List[j][4];
                             Writer.WriteLine(WriteStr);
                             Console.WriteLine(WriteStr);
                         }
